@@ -1,0 +1,184 @@
+/*HEADER*/
+
+header{
+    background-image: url(../immagini/michael-rausch-TgfqwgV1K08-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 50rem;
+    border-bottom: 0.5% solid #ffffff;
+
+    
+}
+
+
+/*ICONA*/
+
+#icona-login-esterna {
+margin-left: 85%; 
+ padding-top: 5%;
+}
+
+
+.flight-login-container {
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px;
+  background: transparent;
+  border-radius: 50%;
+  border: 2px solid #000000;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flying-airplane {
+  transform-origin: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.wind-line {
+  stroke-dasharray: 10;
+  animation: wind 1.5s linear infinite;
+}
+
+.line-2 {
+  animation-delay: 0.7s;
+}
+
+.flight-login-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+}
+
+.flight-login-container:hover .flying-airplane {
+  animation: takeoff 0.5s ease-in-out forwards, shake 0.3s ease-in-out infinite alternate 0.5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(1deg); }
+}
+
+@keyframes wind {
+  0% { stroke-dashoffset: 20; opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes takeoff {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  100% { transform: translateY(-4px) rotate(-8deg) scale(1.05); }
+}
+
+@keyframes shake {
+  0% { transform: translateY(-4px) rotate(-8deg) translateY(0px); }
+  100% { transform: translateY(-4px) rotate(-8deg) translateY(-1px); }
+}
+
+
+/*TITOLO HEADER*/
+
+#h1Header{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8rem;
+    color:#85290a;
+    padding-left: 50%;
+    padding-top: 5%;
+    margin-top: -3%;
+    margin-bottom: 1%;
+}
+
+#h3Header{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color:#85290a;
+    padding-left: 60%;
+    margin-top: 1%;
+    
+}
+
+footer{
+    background-image: url(../immagini/prova.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 20rem;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5%;
+}
+
+#d1{
+    margin-left: 10%;
+}
+
+#d2{
+    margin-left: 10%;
+}
+
+#icone{
+    padding-left: 20%;
+    
+    
+}
+
+#icone svg {
+    margin-right: 2%;
+    height: 3rem;
+}
+
+#icone svg:last-child {
+    margin-right: 0;
+}
+
+.footer{
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.finestra-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background-color: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 1rem rgba(133, 41, 10, 0.3); 
+  width: 90%; 
+  max-width: 450px; 
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.pulsante-chiudi {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.pulsante-chiudi:hover {
+  color: #333;
+}
+
+.finestra-popup h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  color: #85290a; 
+}
+
+
+
+
+

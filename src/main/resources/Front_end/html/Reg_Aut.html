@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi o Registrati - FlyEasy</title>
+    <link rel="stylesheet" href="../style/style_Reg_Aut_Serv.css">
+    <script>
+ 
+function login() {
+
+    const username = document.getElementById("loginUsername").value;
+    const password = document.getElementById("loginPassword").value;
+
+    fetch(`http://localhost:8081/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
+        method: "GET"
+    })
+    .then(res => {
+
+        console.log("Status HTTP:", res.status);
+
+        return res.text().then(text => {
+
+            console.log("Risposta backend:", text);
+
+            if (!res.ok) {
+                throw new Error("Errore login");
+            }
+
+            return text;
+        });
+    })
+.then(token => {
+
+    console.log("Token ricevuto:", token);
+
+    localStorage.setItem("token", token);
+
+    const ruolo = getRoleFromToken(token);
+
+    console.log("Ruolo:", ruolo);
+
+
+    if(ruolo === "ADMIN") {
+
+        window.location.href = "admin.html";
+
+    } else if(ruolo === "USER") {
+
+        window.location.href = "pagina_risposta2.html";
+
+    } else {
+
+        alert("Ruolo non riconosciuto");
+
+    }
+
+})
+    .catch(err => {
+
+        console.error("Errore:", err);
+
+        alert("Login fallito: credenziali errate");
+    });
+
+}
+
+    function getRoleFromToken(token) {
+
+        const payload = token.split(".")[1];
+
+        const decodedPayload = JSON.parse(
+            atob(payload)
+        );
+
+        return decodedPayload.role;
+    }
+
+    </script>
+</head>
+<body>
+    <div class="layout">
+        <div id="d1">
+            <p>Per utilizzare i nostri servizi e sfruttare al massimo tutte le funzionalità della piattaforma, 
+            devi prima effettuare l'accesso. Non hai ancora un account? Nessun problema! <strong>Registrati qui</strong>
+            in pochi passaggi per iniziare subito, oppure fai il <strong>Login</strong> se sei già dei nostri.</p>
+        </div>
+        <div id="d2">
+            <h1>Registrati!</h1>
+            <form action="" id="registerForm">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome"><br>
+                <label for="cognome">Cognome:</label>
+                <input type="text" name="cognome" id="cognome"><br>
+                <label for="indirizzo">Indirizzo:</label>
+                <input type="text" name="indirizzo" id="indirizzo"><br>
+                <label for="cf">Codice fiscale:</label>
+                <input type="text" name="cf" id="cf"><br>
+                <label for="username">Username:</label>
+                <input type="text"  name="username" id="username"><br>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password"><br>
+                <label for="passwordControllo">Ripeti password:</label>
+                <input type="password" name="passwordControllo" id="passwordControllo"><br>
+                <input type="button" value="Registrati!">
+            </form>
+        </div>
+        <div id="d3">
+            <h1 >Fai Login!</h1>
+            <form action="" id="loginForm">
+                <label for="usernameLogin">Username:</label>
+                <input type="text" name="usernameLogin" id="loginUsername"><br>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="loginPassword"><br>
+                <input type="button" value="Login" onclick="login()">
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

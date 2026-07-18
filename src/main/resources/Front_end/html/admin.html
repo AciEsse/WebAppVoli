@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console di Amministrazione</title>
+  <link rel="stylesheet" href="../style/style_Admin_User.css">
+</head>
+<body>
+  <header></header>
+
+  <div class="layout">
+    <div>
+      <nav>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" onclick="apriMenu()">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+        <ul id="menu"> 
+          <li><a href="#inserimento" onclick="event.preventDefault(); apriFieldset('inserimento')">Inserisci volo</a></li> 
+          <li><a href="#modificaElimina" onclick="event.preventDefault(); apriFieldset('modificaElimina')">Modifica - Elimina volo</a></li> 
+          <li><a href="#prenotazione" onclick="event.preventDefault(); apriFieldset('prenotazione')">Prenota volo</a></li> 
+        </ul> 
+      </nav>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Codice</th><th>Compagnia</th><th>Partenza</th><th>Destinazione</th>
+            <th>Data</th><th>Decollo</th><th>Atterraggio</th><th>Posti</th>
+          </tr>
+        </thead>
+        <tbody id="bodyVoli"></tbody>
+      </table>
+    </div>
+
+    <div id="opzione">
+      <!-- FIELDSET 1: INSERIMENTO -->
+      <fieldset id="inserimento">
+        <legend>Inserisci volo!</legend>
+        <form action="">
+          <label for="compagnia">Compagnia aerea:</label>
+          <input type="text" name="compagnia" id="compagnia"><br>
+          <label for="aeroportoPartenza">Aeroporto di partenza:</label>
+          <input type="text" name="aereoportoPartenza" id="aeroportoPartenza"><br>
+          <label for="aeroportoDestinazione">Aeroporto di destinazione:</label>
+          <input type="text" name="aereoportoDestinazione" id="aeroportoDestinazione"><br>
+          <label for="data">Data:</label>
+          <input type="date" name="data" id="data"><br>
+          <label for="orarioDecollo">Orario di decollo:</label>
+          <input type="time" name="orarioDecollo" id="orarioDecollo"><br>
+          <label for="orarioAtterraggio">Orario di atterraggio:</label>
+          <input type="time" name="orarioAtterraggio" id="orarioAtterraggio"><br>
+          <label for="posti">Posti Disponibili:</label>
+          <input type="number" name="posti" id="posti"><br>
+          <input type="button" value="Crea il volo" onclick="inserisci()">
+        </form>
+      </fieldset>
+
+      <!-- FIELDSET 2: MODIFICA / ELIMINA -->
+      <fieldset id="modificaElimina">
+        <legend>Modifica o elimina volo!</legend>
+        <form action="">
+          <label for="putCompagnia">Compagnia aerea:</label>
+          <input type="text" name="putCompagni" id="putCompagnia"><br>
+          <label for="putAeroportoPartenza">Aeroporto di partenza:</label>
+          <input type="text" name="putAeroportoPartenza" id="putAeroportoPartenza"><br>
+          <label for="putAeroportoDestinazione">Aeroporto di destinazione:</label>
+          <input type="text" name="putAeroportoDestinazione" id="putAeroportoDestinazione"><br>
+          <label for="putData">Data:</label>
+          <input type="date" name="putData" id="putData"><br>
+          <label for="putOrarioDecollo">Orario di decollo:</label>
+          <input type="time" name="putOrarioDecollo" id="putOrarioDecollo"><br>
+          <label for="putOrarioAtterraggio">Orario di atterraggio:</label>
+          <input type="time" name="putOrarioAtterraggio" id="putOrarioAtterraggio"><br>
+          <label for="putPostiDisponibili">Posti Disponibili:</label>
+          <input type="number" name="putPostiDisponibili" id="putPostiDisponibili"><br>
+          <input type="button" value="Modifica il volo" onclick="aggiornaVolo()"> 
+          <button type="button" onclick="eliminaVolo()">Elimina volo</button>
+        </form>
+      </fieldset>
+
+      <!-- FIELDSET 3: PRENOTAZIONE -->
+      <fieldset id="prenotazione">
+        <legend>Prenota il volo!</legend>
+        <form action="">
+          <label for="postiPrenotati">Inserisci il numero di posti che vuoi prenotare!</label>
+          <input type="text" name="postiPrenotati" id="postiPrenotati"><br>
+          <button type="button" onclick="prenotaVolo()">Prenota Volo</button>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+
+  <p>prova</p>
+  
+  <script src="../Javascript/Admin_User.js"></script>
+</body>
+</html>
