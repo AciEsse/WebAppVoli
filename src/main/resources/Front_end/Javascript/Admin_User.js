@@ -1,3 +1,19 @@
+fetch('iconaLogin.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('icona-login-esterna').innerHTML = data;
+    })
+    .catch(error => console.error('Errore nel caricamento dell\'icona:', error));
+
+
+function logout(){
+    let log_out=document.getElementById("icona-login-esterna")
+    localStorage.removeItem("token")
+    alert("Logout avvenuto con uccesso")
+    window.location.href="../html/home.html"
+}
+
+
 /* Menu funzionamento */
 function apriMenu(){
   let menu = document.getElementById("menu");

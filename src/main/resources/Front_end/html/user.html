@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="../style/style_Admin_User.css">
+</head>
+<body>
+    <div id="footer">
+        <h1 class="titolo">Viaggia con noi in tutto il mondo!</h1>
+        <h3 class="titolo-scorrevole">Cosa aspetti scegli il tuo volo, ora!</h3>
+        <div id="icona-login-esterna" onclick="logout()"></div>
+    </div>
+    <div id="impaginazione">
+        <div id="d1"></div>
+        <div id="d2"></div>
+        <div id="d3"></div>
+        <div id="d4"></div>
+    </div>
+    <div id="contenuto">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Codice</th><th>Compagnia</th><th>Partenza</th><th>Destinazione</th>
+                        <th>Data</th><th>Decollo</th><th>Atterraggio</th><th>Posti</th>
+                    </tr>
+                 </thead>
+                 <tbody id="bodyVoli"></tbody>
+            </table>
+        </div>
+        <div>
+            <fieldset id="prenotazione">
+                <legend>Prenota il volo!</legend>
+                <form action="">
+                    <label for="postiPrenotati">Inserisci il numero di posti che vuoi prenotare!</label>
+                    <input type="text" name="postiPrenotati" id="postiPrenotati"><br>
+                    <button type="button" onclick="prenotaVolo()">Prenota Volo</button>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+
+    <script src="../Javascript/Admin_User.js"></script>
+    
+</body>
+</html>

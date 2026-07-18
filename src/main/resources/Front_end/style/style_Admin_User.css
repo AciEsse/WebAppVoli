@@ -8,6 +8,67 @@ header{
     
 }
 
+#icona-login-esterna {
+margin-left: 85%; 
+padding-top: 0.4%;
+}
+
+
+.flight-login-container {
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px;
+  background: transparent;
+  border-radius: 50%;
+  border: 2px solid #000000;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flying-airplane {
+  transform-origin: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.wind-line {
+  stroke-dasharray: 10;
+  animation: wind 1.5s linear infinite;
+}
+
+.line-2 {
+  animation-delay: 0.7s;
+}
+
+.flight-login-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+}
+
+.flight-login-container:hover .flying-airplane {
+  animation: takeoff 0.5s ease-in-out forwards, shake 0.3s ease-in-out infinite alternate 0.5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(1deg); }
+}
+
+@keyframes wind {
+  0% { stroke-dashoffset: 20; opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes takeoff {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  100% { transform: translateY(-4px) rotate(-8deg) scale(1.05); }
+}
+
+@keyframes shake {
+  0% { transform: translateY(-4px) rotate(-8deg) translateY(0px); }
+  100% { transform: translateY(-4px) rotate(-8deg) translateY(-1px); }
+}
+
 .layout{
     display: grid;
     grid-template-rows: 1fr 10fr;
@@ -24,8 +85,10 @@ nav{
 }
 
 .bi-list{
-    width: 2rem;  
+    width: 3rem;  
     height: auto;
+    color:#85290a;
+    margin-top: 3rem;
 }
 
 
@@ -40,6 +103,7 @@ nav{
   padding: 0.1rem;
   min-width: 12rem;
   z-index: 100;
+  line-height:3rem;
   
   list-style: none;
 }
@@ -149,4 +213,95 @@ tbody tr:hover {
 input[type="button"] {
     margin: 5%;
    
+}
+
+#impaginazione{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 94%;
+  border: 0.5rem solid #85290a;
+  margin-left: 2rem;
+
+}
+
+#d1{
+  background-image: url("../immagini/nejc-soklic-yFKBh1sC1ng-unsplash.jpg");
+  height: 50rem;
+  background-size: cover;
+  background-position: center;
+}
+
+#d2{
+  background-image: url("../immagini/zhang-kaiyv-vgLNs0TmeCY-unsplash.jpg");
+  height: 50rem;
+  background-size: cover;
+  background-position: center;
+
+}
+#d3{
+   background-image: url("../immagini/evgheni-liuft-bmK6jaGR0Lk-unsplash.jpg");
+  height: 50rem;
+  background-size: cover;
+  background-position: center;
+}
+
+
+
+#d4{
+   background-image: url("../immagini/jeffrey-zhang-s46SRU6N--Q-unsplash.jpg");
+  height: 50rem;
+  background-size: cover;
+  background-position: center;
+}
+
+#footer{
+  margin-bottom: 4rem;
+}
+
+.titolo{
+  margin-top: 7rem;
+  font-size: 3rem;
+  color: #85290a;
+  text-align: center;
+}
+
+
+@keyframes entraDaSinistra {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.titolo-scorrevole{
+  margin-top: 0.2rem;
+  font-size: 1.7rem;
+  color: #85290a;
+  text-align: center;
+
+  animation: entraDaSinistra 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  
+}
+
+#contenuto{
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background-color: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  border: 0.1rem solid #85290a;
+  box-shadow: 0 0 1rem rgba(133, 41, 10, 0.3); 
+  width: 900px; 
+  max-width: 1100px; 
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.5;
 }

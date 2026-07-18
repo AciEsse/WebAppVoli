@@ -47,7 +47,7 @@ function login() {
 
     } else if(ruolo === "USER") {
 
-        window.location.href = "pagina_risposta2.html";
+        window.location.href = "user.html";
 
     } else {
 
@@ -76,6 +76,39 @@ function login() {
         return decodedPayload.role;
     }
 
+    function register(){
+            const nome = document.getElementById("registerNome").value
+            const cognome = document.getElementById("registerCognome").value
+            const indirizzo = document.getElementById("registerIndirizzo").value
+            const cf = document.getElementById("registerCf").value
+            const username = document.getElementById("registerUsername").value
+            const password = document.getElementById("registerPassword").value
+
+
+            fetch("http://localhost:8081/auth/register", {
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+
+                body: JSON.stringify({
+                    "nome": nome, 
+                    "cognome": cognome, 
+                    "indirizzo": indirizzo,
+                    "cf": cf,
+                    "username": username, 
+                    "password": password, 
+                    "role": "USER"
+                })
+            })
+            .then(res=>res.json()) 
+            .then(utente=>{
+                console.log(utente);
+                alert("Registrazione Effettuata!")
+            })
+            .catch(error=>console.error("Errore nella creazione: ", error));
+    }
+
     </script>
 </head>
 <body>
@@ -89,20 +122,20 @@ function login() {
             <h1>Registrati!</h1>
             <form action="" id="registerForm">
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome"><br>
+                <input type="text" name="nome" id="registerNome"><br>
                 <label for="cognome">Cognome:</label>
-                <input type="text" name="cognome" id="cognome"><br>
+                <input type="text" name="cognome" id="registerCognome"><br>
                 <label for="indirizzo">Indirizzo:</label>
-                <input type="text" name="indirizzo" id="indirizzo"><br>
+                <input type="text" name="indirizzo" id="registerIndirizzo"><br>
                 <label for="cf">Codice fiscale:</label>
-                <input type="text" name="cf" id="cf"><br>
+                <input type="text" name="cf" id="registerCf"><br>
                 <label for="username">Username:</label>
-                <input type="text"  name="username" id="username"><br>
+                <input type="text"  name="username" id="registerUsername"><br>
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password"><br>
-                <label for="passwordControllo">Ripeti password:</label>
-                <input type="password" name="passwordControllo" id="passwordControllo"><br>
-                <input type="button" value="Registrati!">
+                <input type="password" name="password" id="registerPassword"><br>
+                <!--<label for="passwordControllo">Ripeti password:</label>
+                <input type="password" name="passwordControllo" id="passwordControllo"><br>-->
+                <input type="button" value="Registrati!" onclick="register()">
             </form>
         </div>
         <div id="d3">
