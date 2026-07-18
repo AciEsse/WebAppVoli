@@ -30,6 +30,22 @@ window.addEventListener('click', function(event) {
   }
 });
 
+/* Filtro funzionamento */
+function apriFiltro(){
+  let menu = document.getElementById("filtro");
+  menu.classList.toggle("active");
+}
+
+window.addEventListener('click', function(event) {
+  let menu = document.getElementById("filtro");
+  let icona = document.querySelector('.bi-funnel'); 
+  if (filtro && filtro.classList.contains('active')) {
+    if (!filtro.contains(event.target) && !icona.contains(event.target)) {
+      filtro.classList.remove('active');
+    }
+  }
+});
+
 /* FUNZIONE APRI FIELDSET CORRETTA E UNICA */
 function apriFieldset(idDelFieldset){
   let tuttiIFieldset = document.querySelectorAll("fieldset");
