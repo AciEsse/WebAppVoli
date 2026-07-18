@@ -1,5 +1,6 @@
 package com.accenture.WebAppVoli.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.WebAppVoli.dto.VoloDto;
@@ -56,6 +58,18 @@ public class VoloController {
     @GetMapping("/voli")
     public List<Volo> getAll(){
         return voloService.getAll();
+    }
+
+    // per la ricerca in base hai parametri sottostanti
+    // required = false vuol dire che il valore può essere omesso
+    @GetMapping("/voli/ricerca")
+    public List<Volo> ricerca(
+            @RequestParam(required = false) String aeroportoPartenza,
+            @RequestParam(required = false) String aeroportoDestinazione,
+            @RequestParam(required = false) LocalDate data,
+            @RequestParam(required = false) String compagnia){
+
+        return voloService.ricerca(aeroportoPartenza, aeroportoDestinazione, data, compagnia);
     }
 
 }
