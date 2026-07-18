@@ -87,5 +87,4 @@ public class VoloService {
 
         return voloRepository.findAll();
     }
-
 }
