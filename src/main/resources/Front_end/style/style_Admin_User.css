@@ -120,7 +120,7 @@ li a{
   display: block;
 }
 
-fieldset{
+.fieldset{
     display: none; 
     width: 70rem;
     margin-top: 5rem;
@@ -131,24 +131,48 @@ fieldset{
    
 }
 
-fieldset.active {
+.fieldset.active {
     display: flex; 
 }
 
-legend{
+#fieldset{
+    width: 80rem;
+    margin-top: 5rem;
+  
+    align-items: center;
+    border: none;
+   
+}
+
+
+.legend{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 1.5rem;
     color: #85290a;
 }
 
+#legend{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #85290a;
+    padding-right: 60rem;
+}
 
-form{
+
+.form{
     padding-left: 15%; 
     padding-right: 30%;      
     align-items: center;     
     max-width: 50%;        
     margin: 2% auto;
+}
+
+#form{ 
+    align-items: center;     
+    max-width: 50%;    
+    margin-left: 4rem;    
 }
 
 label{
@@ -174,15 +198,27 @@ input[type="number"]:focus{
 
 
 
-table {
-    width: 50%;
+.table {
+    width: 30%;
     border-collapse: collapse;
     font-family:Arial, Helvetica, sans-serif;
     text-align: center;
     font-size: 1rem;
     margin-left: 20%;
     margin-right: 30%;
-    margin-top: 10%;
+    margin-top: 5%;
+}
+
+#table {
+    width: 30%;
+    border-collapse: collapse;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    margin-left: 10%;
+    margin-right: 30%;
+    margin-top: 5%;
+    
 }
 
 thead th {
@@ -226,21 +262,21 @@ input[type="button"] {
 
 #d1{
   background-image: url("../immagini/nejc-soklic-yFKBh1sC1ng-unsplash.jpg");
-  height: 50rem;
+  height: 44rem;
   background-size: cover;
   background-position: center;
 }
 
 #d2{
   background-image: url("../immagini/zhang-kaiyv-vgLNs0TmeCY-unsplash.jpg");
-  height: 50rem;
+  height: 44rem;
   background-size: cover;
   background-position: center;
 
 }
 #d3{
    background-image: url("../immagini/evgheni-liuft-bmK6jaGR0Lk-unsplash.jpg");
-  height: 50rem;
+  height: 44rem;
   background-size: cover;
   background-position: center;
 }
@@ -249,20 +285,32 @@ input[type="button"] {
 
 #d4{
    background-image: url("../immagini/jeffrey-zhang-s46SRU6N--Q-unsplash.jpg");
-  height: 50rem;
+  height: 44rem;
   background-size: cover;
   background-position: center;
 }
 
-#footer{
+#header{
+  position: absolute;
+  top:5rem;
   margin-bottom: 4rem;
+  margin-left: 8rem;
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 20rem;
+  background-size: auto;
+  padding: 0.3rem 0.25rem; 
+  width: 80%; 
+  max-width:95%; 
+  height:20rem;
+
 }
 
 .titolo{
-  margin-top: 7rem;
+  margin-top: 3rem;
   font-size: 3rem;
   color: #85290a;
   text-align: center;
+
 }
 
 
@@ -288,7 +336,7 @@ input[type="button"] {
 
 #contenuto{
   position: absolute;
-  top: 110%;
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%); 
   background-color: #fff;
@@ -304,4 +352,5 @@ input[type="button"] {
   color: #555;
   margin-bottom: 2rem;
   line-height: 1.5;
+  height: auto;
 }

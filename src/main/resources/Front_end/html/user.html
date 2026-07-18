@@ -7,20 +7,22 @@
      <link rel="stylesheet" href="../style/style_Admin_User.css">
 </head>
 <body>
-    <div id="footer">
-        <h1 class="titolo">Viaggia con noi in tutto il mondo!</h1>
-        <h3 class="titolo-scorrevole">Cosa aspetti scegli il tuo volo, ora!</h3>
-        <div id="icona-login-esterna" onclick="logout()"></div>
-    </div>
+    
     <div id="impaginazione">
+        
         <div id="d1"></div>
         <div id="d2"></div>
         <div id="d3"></div>
         <div id="d4"></div>
     </div>
+    <div id="header">
+        <h1 class="titolo">Viaggia con noi in tutto il mondo!</h1>
+        <h3 class="titolo-scorrevole">Cosa aspetti scegli il tuo volo, ora!</h3>
+        <div id="icona-login-esterna" onclick="logout()"></div>
+    </div>
     <div id="contenuto">
         <div>
-            <table>
+            <table id="table">
                 <thead>
                     <tr>
                         <th>Codice</th><th>Compagnia</th><th>Partenza</th><th>Destinazione</th>
@@ -31,9 +33,9 @@
             </table>
         </div>
         <div>
-            <fieldset id="prenotazione">
-                <legend>Prenota il volo!</legend>
-                <form action="">
+            <fieldset id="fieldset">
+                <legend id="legend">Prenota il volo!</legend>
+                <form action="" id="form">
                     <label for="postiPrenotati">Inserisci il numero di posti che vuoi prenotare!</label>
                     <input type="text" name="postiPrenotati" id="postiPrenotati"><br>
                     <button type="button" onclick="prenotaVolo()">Prenota Volo</button>

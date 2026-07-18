@@ -25,7 +25,7 @@
 
       <div id="icona-login-esterna" onclick="logout()"></div>
       
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>Codice</th><th>Compagnia</th><th>Partenza</th><th>Destinazione</th>
@@ -38,9 +38,9 @@
 
     <div id="opzione">
       <!-- FIELDSET 1: INSERIMENTO -->
-      <fieldset id="inserimento">
-        <legend>Inserisci volo!</legend>
-        <form action="">
+      <fieldset id="inserimento" class="fieldset">
+        <legend class="legend">Inserisci volo!</legend>
+        <form action="" class="form">
           <label for="compagnia">Compagnia aerea:</label>
           <input type="text" name="compagnia" id="compagnia"><br>
           <label for="aeroportoPartenza">Aeroporto di partenza:</label>
@@ -60,9 +60,9 @@
       </fieldset>
 
       <!-- FIELDSET 2: MODIFICA / ELIMINA -->
-      <fieldset id="modificaElimina">
-        <legend>Modifica o elimina volo!</legend>
-        <form action="">
+      <fieldset id="modificaElimina" class="fieldset">
+        <legend class="legend">Modifica o elimina volo!</legend>
+        <form action="" class="form">
           <label for="putCompagnia">Compagnia aerea:</label>
           <input type="text" name="putCompagni" id="putCompagnia"><br>
           <label for="putAeroportoPartenza">Aeroporto di partenza:</label>
@@ -83,9 +83,9 @@
       </fieldset>
 
       <!-- FIELDSET 3: PRENOTAZIONE -->
-      <fieldset id="prenotazione">
-        <legend>Prenota il volo!</legend>
-        <form action="">
+      <fieldset id="prenotazione" class="fieldset">
+        <legend class="legend">Prenota il volo!</legend>
+        <form action="" class="form">
           <label for="postiPrenotati">Inserisci il numero di posti che vuoi prenotare!</label>
           <input type="text" name="postiPrenotati" id="postiPrenotati"><br>
           <button type="button" onclick="prenotaVolo()">Prenota Volo</button>
