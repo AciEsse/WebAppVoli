@@ -8,7 +8,12 @@ header{
     
 }
 
-#icona-login-esterna {
+.logIconaUser {
+margin-left: 85%; 
+margin-top: -6rem;
+}
+
+.logIcona {
 margin-left: 85%; 
 padding-top: 0.4%;
 }
@@ -89,6 +94,8 @@ nav{
     height: auto;
     color:#85290a;
     margin-top: 3rem;
+    margin-left: -2rem;
+    margin-right: 2rem;
 }
 
 .bi-funnel{
@@ -98,17 +105,22 @@ nav{
     margin-top: 3rem;
 }
 
+#filtroUser{
+
+  margin-left: 10rem;
+}
+
 
 #menu {
   display: none; 
   position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
+  top: 112%;
+  left:-4rem;
+  background-color: rgba(255, 255, 255, 0.35);
   border: 0.1rem solid #85290a;
   box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
   padding: 0.1rem;
-  min-width: 12rem;
+  min-width: 15rem;
   z-index: 100;
   line-height:3rem;
   
@@ -118,24 +130,26 @@ nav{
 #filtro {
   display: none; 
   position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
+  top: 112%;
+  left: -3rem;
+  background-color: rgba(255, 255, 255, 0.35);
   border: 0.1rem solid #85290a;
   box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
   padding: 0.1rem;
-  min-width: 14rem;
+  min-width: 15rem;
   z-index: 100;
   line-height:3rem;
-  
   list-style: none;
 }
+
+
 
 li a{
     font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   text-decoration:none;
   color: black;
+  margin-left: 2rem;
 
 }
 
@@ -145,6 +159,10 @@ li{
   text-decoration:none;
   color: black;
 
+}
+
+.listafiltro{
+  padding-left: 2rem;
 }
 
 #menu.active {
@@ -211,6 +229,10 @@ li{
     margin-left: 4rem;    
 }
 
+
+  
+
+
 label{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.9rem;
@@ -240,7 +262,7 @@ input[type="number"]:focus{
     font-family:Arial, Helvetica, sans-serif;
     text-align: center;
     font-size: 1rem;
-    margin-left: 20%;
+    margin-left: 22.5%;
     margin-right: 30%;
     margin-top: 5%;
 }
