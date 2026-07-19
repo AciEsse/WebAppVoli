@@ -28,17 +28,17 @@
     <form action="" id="formFiltro">
         <ul id="filtro" > 
            <li class="listafiltro">Partenza:</li> 
-          <input type="text" id="filtroPartenza" name="aeroportoPartenza" style="border-top: none; border-right: none; margin-left: 1.8rem;">
+          <input type="text" id="filtroPartenza" name="aeroportoPartenza" style="border-top: none; border-right: none; margin-left: 1.8rem; background-color: rgba(255, 255, 255, 0.35)">
           <li class="listafiltro">Destinazione:</li> 
-          <input type="text" id="filtroDestinazione" name="aeroportoDestinazione" style="border-top: none; border-right: none; margin-left: 1.8rem;">
+          <input type="text" id="filtroDestinazione" name="aeroportoDestinazione" style="border-top: none; border-right: none; margin-left: 1.8rem; background-color: rgba(255, 255, 255, 0.35)">
           <li class="listafiltro">Orario partenza:</li> 
-          <input type="time" name="orarioDecollo" id="filtroOrarioPartenza" style="border-top: none; border-right: none; margin-left: 1.8rem;">
+          <input type="time" name="orarioDecollo" id="filtroOrarioPartenza" style="border-top: none; border-right: none; margin-left: 1.8rem;background-color: rgba(255, 255, 255, 0.35);">
           <li class="listafiltro">Orario arrivo:</li> 
-          <input type="time" name="orarioAtterraggio" id="filtroOrarioArrivo" style="border-top: none; border-right: none; margin-left: 1.8rem;">
+          <input type="time" name="orarioAtterraggio" id="filtroOrarioArrivo" style="border-top: none; border-right: none; margin-left: 1.8rem; background-color: rgba(255, 255, 255, 0.35)">
           <li class="listafiltro">Data:</li> 
-          <input type="date" name="data" id="filtroData" style="border-top: none; border-right: none; margin-left: 1.8rem;">
+          <input type="date" name="data" id="filtroData" style="border-top: none; border-right: none; margin-left: 1.8rem; background-color: rgba(255, 255, 255, 0.35)">
           <li class="listafiltro">Compagnia:</li> 
-          <input type="text" name="compagnia" id="filtroCompagnia" style="border-top: none; border-right: none; margin-left: 1.8rem;"><br>
+          <input type="text" name="compagnia" id="filtroCompagnia" style="border-top: none; border-right: none; margin-left: 1.8rem; background-color: rgba(255, 255, 255, 0.35)"><br>
           <input type="button" value="Filtra" onclick="filtraUser()" id="cerca">
           <input type="reset" value="Resetta">
         
@@ -66,7 +66,7 @@
                 <form action="" id="form">
                     <label for="postiPrenotati">Inserisci il numero di posti che vuoi prenotare!</label>
                     <input type="text" name="postiPrenotati" id="postiPrenotati"><br>
-                    <button type="button" onclick="prenotaVolo()">Prenota Volo</button>
+                    <button type="button" onclick="prenotaVoloUser()">Prenota Volo</button>
                 </form>
             </fieldset>
         </div>

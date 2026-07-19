@@ -9,7 +9,7 @@ fetch('iconaLogin.html')
 function logout(){
     let log_out=document.getElementById("icona-login-esterna")
     localStorage.removeItem("token")
-    alert("Logout avvenuto con uccesso")
+    alert("Logout avvenuto con successo")
     window.location.href="../html/home.html"
 }
 
@@ -57,7 +57,26 @@ function apriFieldset(idDelFieldset){
   }
 }
 
+// Global variable per tracciare la selezione
 let idVoloSelezionato = null;
+
+// FUNZIONE DI UTILITÀ: Estrae l'ID utente dal token JWT memorizzato nel localStorage
+function ottieniIdDaToken() {
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+    try {
+        // Il payload del JWT è la stringa centrale racchiusa tra due punti
+        const payloadBase64 = token.split('.')[1];
+        const stringaDecodificata = atob(payloadBase64);
+        const datiToken = JSON.parse(stringaDecodificata);
+        
+        // Mappa i formati di output standard di Spring Boot (id, userId o sub)
+        return datiToken.id || datiToken.userId || datiToken.sub;
+    } catch (e) {
+        console.error("Errore decodifica JWT:", e);
+        return null;
+    }
+}
 
 function inserisci(){
     const compagnia = document.getElementById("compagnia").value;
@@ -132,8 +151,13 @@ function caricaVoli(){
                 <td>${volo.postiDisponibili}</td>
             `;
 
+            // Riconosce automaticamente il contesto e assegna la funzione corretta
             riga.onclick = function() {
-                selezionaVolo(volo, riga);
+                if (document.getElementById("putCompagnia")) {
+                    selezionaVolo(volo, riga);
+                } else {
+                    selezionaVoloUser(volo, riga);
+                }
             };
 
             body.appendChild(riga);
@@ -147,6 +171,7 @@ function caricaVoli(){
 
 document.addEventListener("DOMContentLoaded", caricaVoli);
 
+// SELEZIONE ADMIN ORIGINALMENTE INALTERATA
 function selezionaVolo(volo, rigaElemento) {
     idVoloSelezionato = volo.codice; 
 
@@ -165,6 +190,8 @@ function selezionaVolo(volo, rigaElemento) {
 
     console.log("Hai selezionato il volo ID:", idVoloSelezionato);
 }
+
+
 
 function aggiornaVolo(){
 
@@ -261,28 +288,103 @@ function eliminaVolo(){
     });
 }
 
-function prenotaVolo(){
 
+function prenotaVolo() {
     if (!idVoloSelezionato) {
         alert("Seleziona prima un volo dalla tabella cliccandoci sopra!");
         return;
     }
 
     const idNumerico = parseInt(idVoloSelezionato, 10);
-
     if (isNaN(idNumerico)) {
-        alert("Errore: Il codice del volo non è valido.");
+        alert("Errore: Il codice di questo volo non è un numero valido.");
         return;
     }
 
-    const postiPrenotati = document.getElementById("postiPrenotati").value;
-    const idUtenteLoggato = localStorage.getItem("idUtente");
+    const inputPosti = document.getElementById("postiPrenotati");
+    const postiPrenotati = Number(inputPosti.value);
 
-    console.log(JSON.stringify({
-        postiPrenotati: Number(postiPrenotati),
-        user: Number(idUtenteLoggato)
-    }));
+    // Recupero dinamico dal token funzionante
+    const idUtente = ottieniIdDaToken();
+    if(!idUtente){
+        alert("Utente non riconosciuto dal Session Token. Effettua nuovamente il login");
+        return;
+    }
 
+    console.log({
+        volo:idNumerico,
+        posti:postiPrenotati,
+        utente:idUtente
+    });
+
+    fetch(`http://localhost:8081/voli/${idNumerico}/prenotazioni`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+    body: JSON.stringify({
+        postiPrenotati: postiPrenotati,
+        user: { id: Number(idUtente) } 
+    })
+})
+    .then(response=>{
+        console.log("Status prenotazione:",response.status);
+        if(!response.ok){
+            throw new Error("Errore prenotazione: "+response.status);
+        }
+        return response.json();
+    })
+    .then(data=>{
+        console.log("Prenotazione effettuata:",data);
+        alert("Prenotazione effettuata!");
+        document.getElementById("postiPrenotati").value="";
+        caricaVoli();
+    })
+    .catch(error=>{
+        console.error(error);
+        alert("Prenotazione non riuscita");
+    });
+}
+
+// SELEZIONE USER SPECIFICA
+function selezionaVoloUser(volo, rigaElemento) {
+    idVoloSelezionato = volo.codice; 
+
+    const righe = document.querySelectorAll("#bodyVoli tr");
+    righe.forEach(r => r.classList.remove("riga-selezionata"));
+
+    rigaElemento.classList.add("riga-selezionata");
+
+    console.log("Volo scelto dall'utente:", idVoloSelezionato);
+}
+
+function prenotaVoloUser() {
+    if (!idVoloSelezionato) {
+        alert("Seleziona un volo dalla tabella prima di procedere con la prenotazione!");
+        return;
+    }
+
+    const idNumerico = parseInt(idVoloSelezionato, 10);
+    const inputPosti = document.getElementById("postiPrenotati");
+    const postiPrenotati = Number(inputPosti.value);
+
+    if (!postiPrenotati || postiPrenotati <= 0) {
+        alert("Inserisci un numero di posti valido!");
+        return;
+    }
+
+    const idUtente = ottieniIdDaToken();
+    if (!idUtente) {
+        alert("Sessione scaduta o non valida. Effettua di nuovo il login.");
+        return;
+    }
+
+    // Costruiamo il body mandando l'ID utente come singolo intero numerico
+    const bodyRichiesta = {
+        postiPrenotati: postiPrenotati,
+        user: Number(idUtente) // 🌟 Prova prima con 'user'. Se fallisce ancora, cambialo in 'idUtente' o 'userId'
+    };
 
     fetch(`http://localhost:8081/voli/${idNumerico}/prenotazioni`, {
         method: "POST",
@@ -290,38 +392,31 @@ function prenotaVolo(){
             "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify({
-            postiPrenotati: Number(postiPrenotati),
-            user: Number(idUtenteLoggato)
-        })
+        body: JSON.stringify(bodyRichiesta)
     })
-    .then(res => {
-        console.log("Status:", res.status);
-        if(!res.ok){
-            throw new Error("Errore prenotazione volo");
-        }
-        return res.json();
+    .then(response => {
+        if (!response.ok) throw new Error("Errore prenotazione");
+        return response.json();
     })
-    .then(volo => {
-        console.log("Volo prenotato:", volo);
-        alert("Volo prenotato correttamente!");
-        caricaVoli();
+    .then(data => {
+        alert("Prenotazione completata con successo!");
+        inputPosti.value = "";
+        filtraUser(); 
     })
     .catch(error => {
-        console.error("Errore:", error);
-        alert("Prenotazione fallita");
+        console.error(error);
+        alert("Impossibile completare la prenotazione. Controlla la console.");
     });
-} // Chiusura corretta di prenotaVolo()
+}
+
 
 function filtra() {
     const form = document.getElementById('formFiltro');
     const formData = new FormData(form);
     
-    // 1. Recuperiamo gli orari inseriti dall'utente usando i name/id del form filtro
     const inputOrarioDecollo = document.getElementById("filtroOrarioPartenza") ? document.getElementById("filtroOrarioPartenza").value.trim().substring(0, 5) : "";
     const inputOrarioAtterraggio = document.getElementById("filtroOrarioArrivo") ? document.getElementById("filtroOrarioArrivo").value.trim().substring(0, 5) : "";
 
-    // 2. Costruiamo i parametri escludendo i campi orario per non mandare in crash il backend
     const params = new URLSearchParams();
     for (const [key, value] of formData.entries()) {
         if (key !== 'orarioDecollo' && key !== 'orarioAtterraggio' && value.trim() !== '') {
@@ -329,7 +424,6 @@ function filtra() {
         }
     }
 
-    // 3. Inviamo la richiesta a Spring Boot con i soli parametri supportati (data, aeroporti, compagnia)
     fetch(`http://localhost:8081/voli/ricerca?${params.toString()}`, {
         method: "GET",
         headers: {
@@ -343,19 +437,15 @@ function filtra() {
         return response.json();
     })
     .then(voli => {
-        // 4. Eseguiamo il filtraggio client-side sull'array ricevuto
         let voliFiltrati = voli;
 
-        // Filtro per orario di decollo
         if (inputOrarioDecollo !== "") {
             voliFiltrati = voliFiltrati.filter(volo => {
-                // Prende i primi 5 caratteri (HH:mm) dell'orario memorizzato nel volo
                 const oraVolo = volo.orarioDecollo ? volo.orarioDecollo.substring(0, 5) : "";
                 return oraVolo === inputOrarioDecollo;
             });
         }
 
-        // Filtro per orario di atterraggio
         if (inputOrarioAtterraggio !== "") {
             voliFiltrati = voliFiltrati.filter(volo => {
                 const oraVolo = volo.orarioAtterraggio ? volo.orarioAtterraggio.substring(0, 5) : "";
@@ -363,7 +453,6 @@ function filtra() {
             });
         }
 
-        // 5. Mostriamo nella tabella i voli che corrispondono sia ai criteri del server che a quelli degli orari
         aggiornaTabella(voliFiltrati);
     })
     .catch(error => {
@@ -384,7 +473,7 @@ function aggiornaTabella(voli) {
 
     voli.forEach(volo => {
         const row = document.createElement('tr');
-        row.style.cursor = "pointer"; // Mantiene lo stile coerente con caricaVoli
+        row.style.cursor = "pointer"; 
         
         row.innerHTML = `
             <td>${volo.codice || '-'}</td>
@@ -394,13 +483,15 @@ function aggiornaTabella(voli) {
             <td>${volo.data || '-'}</td>
             <td>${volo.orarioDecollo || '-'}</td>
             <td>${volo.orarioAtterraggio || '-'}</td> 
-            
             <td>${volo.postiDisponibili || '-'}</td>
         `;
         
-        // Mantiene la possibilità di cliccare la riga anche dopo aver filtrato
         row.onclick = function() {
-            selezionaVolo(volo, row);
+            if (document.getElementById("putCompagnia")) {
+                selezionaVolo(volo, row);
+            } else {
+                selezionaVoloUser(volo, row);
+            }
         };
         
         tbody.appendChild(row);
@@ -449,55 +540,38 @@ function filtraUser() {
     })
     .then(voli => {
 
-
         let risultati = voli;
 
-
-        // filtro orario partenza lato client
         if(orarioPartenza !== "") {
-
             risultati = risultati.filter(v => 
                 v.orarioDecollo &&
                 v.orarioDecollo.substring(0,5) === orarioPartenza
             );
         }
 
-
-        // filtro orario arrivo lato client
         if(orarioArrivo !== "") {
-
             risultati = risultati.filter(v => 
                 v.orarioAtterraggio &&
                 v.orarioAtterraggio.substring(0,5) === orarioArrivo
             );
         }
 
-
-
         const tbody = document.getElementById("bodyVoli");
-
         tbody.innerHTML = "";
 
-
         if(risultati.length === 0){
-
             tbody.innerHTML =
             `<tr>
                 <td colspan="8" style="text-align:center">
                     Nessun volo trovato
                 </td>
             </tr>`;
-
             return;
         }
 
-
         risultati.forEach(volo => {
-
             const riga = document.createElement("tr");
-
             riga.style.cursor = "pointer";
-
 
             riga.innerHTML = `
                 <td>${volo.codice ?? "-"}</td>
@@ -510,34 +584,21 @@ function filtraUser() {
                 <td>${volo.postiDisponibili ?? "-"}</td>
             `;
 
-
-            // selezione volo per prenotazione USER
             riga.onclick = function(){
-
                 idVoloSelezionato = volo.codice;
-
                 document
                 .querySelectorAll("#bodyVoli tr")
                 .forEach(r => r.classList.remove("riga-selezionata"));
 
                 riga.classList.add("riga-selezionata");
-
-
                 console.log("Volo scelto:", idVoloSelezionato);
             };
 
-
             tbody.appendChild(riga);
-
         });
-
-
     })
     .catch(error => {
-
         console.error(error);
         alert("Errore durante la ricerca dei voli");
-
     });
-
 }
