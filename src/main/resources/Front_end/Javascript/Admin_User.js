@@ -347,69 +347,6 @@ function prenotaVolo() {
     });
 }
 
-// SELEZIONE USER SPECIFICA
-function selezionaVoloUser(volo, rigaElemento) {
-    idVoloSelezionato = volo.codice; 
-
-    const righe = document.querySelectorAll("#bodyVoli tr");
-    righe.forEach(r => r.classList.remove("riga-selezionata"));
-
-    rigaElemento.classList.add("riga-selezionata");
-
-    console.log("Volo scelto dall'utente:", idVoloSelezionato);
-}
-
-function prenotaVoloUser() {
-    if (!idVoloSelezionato) {
-        alert("Seleziona un volo dalla tabella prima di procedere con la prenotazione!");
-        return;
-    }
-
-    const idNumerico = parseInt(idVoloSelezionato, 10);
-    const inputPosti = document.getElementById("postiPrenotati");
-    const postiPrenotati = Number(inputPosti.value);
-
-    if (!postiPrenotati || postiPrenotati <= 0) {
-        alert("Inserisci un numero di posti valido!");
-        return;
-    }
-
-    const idUtente = ottieniIdDaToken();
-    if (!idUtente) {
-        alert("Sessione scaduta o non valida. Effettua di nuovo il login.");
-        return;
-    }
-
-    // Costruiamo il body mandando l'ID utente come singolo intero numerico
-    const bodyRichiesta = {
-        postiPrenotati: postiPrenotati,
-        user: Number(idUtente) // 🌟 Prova prima con 'user'. Se fallisce ancora, cambialo in 'idUtente' o 'userId'
-    };
-
-    fetch(`http://localhost:8081/voli/${idNumerico}/prenotazioni`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token")
-        },
-        body: JSON.stringify(bodyRichiesta)
-    })
-    .then(response => {
-        if (!response.ok) throw new Error("Errore prenotazione");
-        return response.json();
-    })
-    .then(data => {
-        alert("Prenotazione completata con successo!");
-        inputPosti.value = "";
-        filtraUser(); 
-    })
-    .catch(error => {
-        console.error(error);
-        alert("Impossibile completare la prenotazione. Controlla la console.");
-    });
-}
-
-
 function filtra() {
     const form = document.getElementById('formFiltro');
     const formData = new FormData(form);
@@ -498,107 +435,35 @@ function aggiornaTabella(voli) {
     });
 }
 
-function filtraUser() {
+function filtra(){
+    const codice=parseInt(document.getElementById("codice").value)
+    const postiPrenotati= document.getElementById("postiPrenotati").value
 
-    const form = document.getElementById("formFiltro");
-    const formData = new FormData(form);
-
-    const params = new URLSearchParams();
-
-    for (const [key, value] of formData.entries()) {
-        if (value.trim() !== "" &&
-            key !== "orarioDecollo" &&
-            key !== "orarioAtterraggio") {
-
-            params.append(key, value.trim());
-        }
-    }
-
-
-    const orarioPartenza = document
-        .getElementById("filtroOrarioPartenza")
-        .value.substring(0,5);
-
-    const orarioArrivo = document
-        .getElementById("filtroOrarioArrivo")
-        .value.substring(0,5);
-
-
-    fetch(`http://localhost:8081/voli/ricerca?${params.toString()}`, {
-        method: "GET",
+    fetch(`http://localhost:8081/voli/${codice}/prenotazioni`, {
+        method: "POST",
         headers: {
+            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
-        }
+        },
+
+        body: JSON.stringify(parseInt(postiPrenotati))
     })
-    .then(response => {
-
-        if(!response.ok){
-            throw new Error("Errore ricerca voli");
+    .then(res => {
+        console.log("Status:", res.status);
+        if(!res.ok){
+            throw new Error("Errore penotazionevolo");
         }
-
-        return response.json();
+        return res.json();
     })
-    .then(voli => {
-
-        let risultati = voli;
-
-        if(orarioPartenza !== "") {
-            risultati = risultati.filter(v => 
-                v.orarioDecollo &&
-                v.orarioDecollo.substring(0,5) === orarioPartenza
-            );
-        }
-
-        if(orarioArrivo !== "") {
-            risultati = risultati.filter(v => 
-                v.orarioAtterraggio &&
-                v.orarioAtterraggio.substring(0,5) === orarioArrivo
-            );
-        }
-
-        const tbody = document.getElementById("bodyVoli");
-        tbody.innerHTML = "";
-
-        if(risultati.length === 0){
-            tbody.innerHTML =
-            `<tr>
-                <td colspan="8" style="text-align:center">
-                    Nessun volo trovato
-                </td>
-            </tr>`;
-            return;
-        }
-
-        risultati.forEach(volo => {
-            const riga = document.createElement("tr");
-            riga.style.cursor = "pointer";
-
-            riga.innerHTML = `
-                <td>${volo.codice ?? "-"}</td>
-                <td>${volo.compagnia ?? "-"}</td>
-                <td>${volo.aeroportoPartenza ?? "-"}</td>
-                <td>${volo.aeroportoDestinazione ?? "-"}</td>
-                <td>${volo.data ?? "-"}</td>
-                <td>${volo.orarioDecollo ?? "-"}</td>
-                <td>${volo.orarioAtterraggio ?? "-"}</td>
-                <td>${volo.postiDisponibili ?? "-"}</td>
-            `;
-
-            riga.onclick = function(){
-                idVoloSelezionato = volo.codice;
-                document
-                .querySelectorAll("#bodyVoli tr")
-                .forEach(r => r.classList.remove("riga-selezionata"));
-
-                riga.classList.add("riga-selezionata");
-                console.log("Volo scelto:", idVoloSelezionato);
-            };
-
-            tbody.appendChild(riga);
-        });
+    .then(volo => {
+        console.log("Volo prenotato:", volo);
+        alert("Volo prenotato correttamente!");
+        location.reload(true)
     })
     .catch(error => {
-        console.error(error);
-        alert("Errore durante la ricerca dei voli");
+        console.error("Errore:", error);
+        alert("Prenotazione fallita");
     });
 }
+
+

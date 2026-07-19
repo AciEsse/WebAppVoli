@@ -64,9 +64,11 @@
             <fieldset id="fieldset">
                 <legend id="legend">Prenota il volo!</legend>
                 <form action="" id="form">
+                    <label for="codice">Inserisci il codice del volo da prenotare</label>
+                    <input type="number" name="codice" id="codice"><br>
                     <label for="postiPrenotati">Inserisci il numero di posti che vuoi prenotare!</label>
-                    <input type="text" name="postiPrenotati" id="postiPrenotati"><br>
-                    <button type="button" onclick="prenotaVoloUser()">Prenota Volo</button>
+                    <input type="number" name="postiPrenotati" id="postiPrenotati"><br>
+                    <button type="button" onclick="filtra()">Prenota Volo</button>
                 </form>
             </fieldset>
         </div>
