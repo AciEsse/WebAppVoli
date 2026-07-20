@@ -1,10 +1,14 @@
+
+body {
+    background-color: #faf7f5;
+}
 /*HEADER*/
 
 header{
     background-image: url(../immagini/michael-rausch-TgfqwgV1K08-unsplash.jpg);
     
     height: 30rem;
-    border-bottom: 0.1% solid #ffffff;
+    border-bottom: 0.1% solid #faf7f5;
     background-size: cover;
     background-position: center;
 
@@ -98,7 +102,7 @@ margin-left: 85%;
 }
 
 footer{
-    background-color: #ffffff;
+    background-color:#faf7f5;
     height: 20rem;
 
 }

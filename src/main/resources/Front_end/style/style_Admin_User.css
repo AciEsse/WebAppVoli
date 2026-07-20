@@ -1,12 +1,29 @@
-header{
-    background-image: url(../immagini/head.jpg);
-    background-repeat: no-repeat;
+/*header{
+    background-color: #ffffff;
     background-size: 100%;
-    height: 10rem;
+    height: 20rem;
     border-bottom: 0.5% solid #ffffff;
 
     
+}*/
+
+body {
+    background-color: #faf7f5;
 }
+
+.contenitore{
+  width: 100%;
+  height: 20rem;
+}
+.sfondo{
+    background-image: url(../immagini/head.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 50%;
+    
+}
+
 
 .logIconaUser {
 margin-left: 85%; 
@@ -15,7 +32,7 @@ margin-top: -6rem;
 
 .logIcona {
 margin-left: 85%; 
-padding-top: 0.4%;
+margin-top: -4rem;
 }
 
 
@@ -74,7 +91,7 @@ padding-top: 0.4%;
   100% { transform: translateY(-4px) rotate(-8deg) translateY(-1px); }
 }
 
-.layout{
+/*.layout{
     display: grid;
     grid-template-rows: 1fr 10fr;
     margin-top: 3rem;
@@ -82,7 +99,7 @@ padding-top: 0.4%;
     margin-left: 8rem;
     margin-right: 8rem;
     
-}
+}*/
 
 nav{
   position: relative;
@@ -94,7 +111,7 @@ nav{
     height: auto;
     color:#85290a;
     margin-top: 3rem;
-    margin-left: -2rem;
+    margin-left: 4rem;
     margin-right: 2rem;
 }
 
@@ -115,7 +132,7 @@ nav{
   display: none; 
   position: absolute;
   top: 112%;
-  left:-4rem;
+  left:1rem;
   background-color: rgba(255, 255, 255, 0.35);
   border: 0.1rem solid #85290a;
   box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
@@ -190,11 +207,11 @@ li{
 }
 
 #fieldset{
-    width: 80rem;
-    margin-top: 5rem;
-  
-    align-items: center;
+    width: 90%;
+    max-width: 100%;
+    padding: 1.5rem;
     border: none;
+    height: ;
    
 }
 
@@ -204,6 +221,7 @@ li{
     font-weight: bold;
     font-size: 1.5rem;
     color: #85290a;
+    margin-left: 15rem;
 }
 
 #legend{
@@ -212,6 +230,10 @@ li{
     font-size: 1.5rem;
     color: #85290a;
     padding-right: 60rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    padding: 0 0.5rem;
+
+
 }
 
 
@@ -224,9 +246,33 @@ li{
 }
 
 #form{ 
-    align-items: center;     
-    max-width: 50%;    
-    margin-left: 4rem;    
+    max-width: 100%;
+    gap: 1rem;
+    margin: 2% auto;
+    align-items: center;  
+}
+
+#form label {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+     align-self: flex-start;
+     width: 30%;
+     max-width: 40%;
+     display: inline-block;
+    
+
+    
+}
+
+#form input {
+    width: 35%;
+    max-width: 40%;
+    padding: 0.05rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#form button {
+    max-width: 20%;
 }
 
 
@@ -262,20 +308,24 @@ input[type="number"]:focus{
     font-family:Arial, Helvetica, sans-serif;
     text-align: center;
     font-size: 1rem;
-    margin-left: 22.5%;
-    margin-right: 30%;
+    margin:5% auto;
     margin-top: 5%;
 }
 
+#contenutoTabella{
+  width: 100%;
+  overflow-x: auto;
+}
+
 #table {
-    width: 30%;
+     width: 100%;
     border-collapse: collapse;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     font-size: 1rem;
-    margin-left: 10%;
-    margin-right: 30%;
-    margin-top: 5%;
+    margin: 5% auto 0;
+    table-layout: fixed;
+    margin-bottom: 3rem;
     
 }
 
@@ -393,8 +443,8 @@ input[type="button"] {
 }
 
 #contenuto{
-  position: absolute;
-  top: 100%;
+  position: relative;
+  top: -40rem;
   left: 50%;
   transform: translate(-50%, -50%); 
   background-color: #fff;
@@ -402,8 +452,8 @@ input[type="button"] {
   border-radius: 12px;
   border: 0.1rem solid #85290a;
   box-shadow: 0 0 1rem rgba(133, 41, 10, 0.3); 
-  width: 900px; 
-  max-width: 1100px; 
+  width: 60%; 
+  max-width: 80%; 
   text-align: center;
   box-sizing: border-box;
   font-size: 1rem;

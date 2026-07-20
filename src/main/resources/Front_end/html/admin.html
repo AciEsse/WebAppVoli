@@ -8,10 +8,12 @@
  
 </head>
 <body>
-  <header></header>
+  <header>
 
-  <div class="layout">
-    <div>
+
+    <div class="contenitore">
+      <div class="sfondo">
+      </div>
       <nav>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" onclick="apriMenu()">
           <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
@@ -22,6 +24,7 @@
           <li><a href="#prenotazione" onclick="event.preventDefault(); apriFieldset('prenotazione')">Prenota volo</a></li> 
         </ul> 
       </nav>
+      
 
       <nav>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16" onclick="apriFiltro()">
@@ -50,6 +53,9 @@
       </nav>
 
       <div id="icona-login-esterna" onclick="logout()" class="logIcona"></div>
+    </div>
+
+    </header>
       
       <table class="table">
         <thead>
@@ -60,7 +66,7 @@
         </thead>
         <tbody id="bodyVoli"></tbody>
       </table>
-    </div>
+  
 
     <div id="opzione">
       <!-- FIELDSET 1: INSERIMENTO -->
@@ -120,7 +126,7 @@
         </form>
       </fieldset>
     </div>
-  </div>
+ 
 
   
   
