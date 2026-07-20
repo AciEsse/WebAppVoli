@@ -435,7 +435,7 @@ function aggiornaTabella(voli) {
     });
 }
 
-function filtra(){
+function prenota(){
     const codice=parseInt(document.getElementById("codice").value)
     const postiPrenotati= document.getElementById("postiPrenotati").value
 
