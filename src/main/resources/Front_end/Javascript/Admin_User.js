@@ -348,20 +348,13 @@ function prenotaVolo() {
 }
 
 function filtra() {
-    const form = document.getElementById('formFiltro');
-    const formData = new FormData(form);
-    
-    const inputOrarioDecollo = document.getElementById("filtroOrarioPartenza") ? document.getElementById("filtroOrarioPartenza").value.trim().substring(0, 5) : "";
-    const inputOrarioAtterraggio = document.getElementById("filtroOrarioArrivo") ? document.getElementById("filtroOrarioArrivo").value.trim().substring(0, 5) : "";
 
-    const params = new URLSearchParams();
-    for (const [key, value] of formData.entries()) {
-        if (key !== 'orarioDecollo' && key !== 'orarioAtterraggio' && value.trim() !== '') {
-            params.append(key, value.trim());
-        }
-    }
+    const partenza = document.getElementById("filtroPartenza").value.trim().toLowerCase();
+    const destinazione = document.getElementById("filtroDestinazione").value.trim().toLowerCase();
+    const data = document.getElementById("filtroData").value.trim();
+    const compagnia = document.getElementById("filtroCompagnia").value.trim().toLowerCase();
 
-    fetch(`http://localhost:8081/voli/ricerca?${params.toString()}`, {
+    fetch("http://localhost:8081/voli", {
         method: "GET",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
@@ -369,32 +362,34 @@ function filtra() {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Errore nella ricerca dei voli');
+            throw new Error("Errore nel recupero dei voli");
         }
         return response.json();
     })
     .then(voli => {
-        let voliFiltrati = voli;
 
-        if (inputOrarioDecollo !== "") {
-            voliFiltrati = voliFiltrati.filter(volo => {
-                const oraVolo = volo.orarioDecollo ? volo.orarioDecollo.substring(0, 5) : "";
-                return oraVolo === inputOrarioDecollo;
-            });
-        }
+        const voliFiltrati = voli.filter(volo => {
 
-        if (inputOrarioAtterraggio !== "") {
-            voliFiltrati = voliFiltrati.filter(volo => {
-                const oraVolo = volo.orarioAtterraggio ? volo.orarioAtterraggio.substring(0, 5) : "";
-                return oraVolo === inputOrarioAtterraggio;
-            });
-        }
+            return (
+                (partenza === "" ||
+                    volo.aeroportoPartenza.toLowerCase().includes(partenza)) &&
+
+                (destinazione === "" ||
+                    volo.aeroportoDestinazione.toLowerCase().includes(destinazione)) &&
+
+                (compagnia === "" ||
+                    volo.compagnia.toLowerCase().includes(compagnia)) &&
+
+                (data === "" ||
+                    volo.data === data)
+            );
+        });
 
         aggiornaTabella(voliFiltrati);
     })
     .catch(error => {
-        console.error('Errore:', error);
-        alert('Si è verificato un errore durante la ricerca.');
+        console.error(error);
+        alert("Si è verificato un errore durante la ricerca.");
     });
 }
 
