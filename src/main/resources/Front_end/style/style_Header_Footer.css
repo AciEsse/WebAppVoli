@@ -190,5 +190,142 @@ footer{
 
 
 
+/* RESPONSIVE MOBILE E TABLET */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    /* HEADER */
+    header {
+        height: auto;
+        min-height: 25rem;
+        background-position: center;
+    }
+
+
+    /* ICONA LOGIN */
+    #icona-login-esterna {
+        margin-left: 0;
+        padding-top: 2rem;
+        text-align: right;
+        padding-right: 2rem;
+    }
+
+
+    /* TITOLO */
+    #h1Header {
+        font-size: clamp(2.5rem, 12vw, 5rem);
+        padding-left: 0;
+        padding-top: 5rem;
+        margin-top: 0;
+        text-align: center;
+    }
+
+
+    #h3Header {
+        font-size: 1rem;
+        padding-left: 0;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+
+    /* FOOTER */
+    footer {
+        height: auto;
+    }
+
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        gap: 2rem;
+    }
+
+
+    #d1,
+    #d2 {
+        margin-left: 0;
+        text-align: center;
+    }
+
+
+    #icone {
+        padding-left: 0;
+        text-align: center;
+    }
+
+
+    #icone svg {
+        width: 1.5rem;
+        margin-right: 1rem;
+    }
+
+
+    .footer {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+
+    /* POPUP */
+    .finestra-popup {
+        width: 90%;
+        max-width: none;
+        padding: 2rem 1rem;
+    }
+
+
+    .finestra-popup h2 {
+        font-size: 1.3rem;
+    }
+
+}
+
+
+
+/* SCHERMI MOLTO PICCOLI */
+
+@media screen and (max-width: 480px) {
+
+
+    header {
+        min-height: 20rem;
+    }
+
+
+    #h1Header {
+        font-size: 2.5rem;
+    }
+
+
+    #h3Header {
+        font-size: 0.8rem;
+    }
+
+
+    .flight-login-container {
+        transform: scale(0.8);
+    }
+
+
+    .finestra-popup {
+        font-size: 0.9rem;
+    }
+
+}
+
+
+
+
 
 

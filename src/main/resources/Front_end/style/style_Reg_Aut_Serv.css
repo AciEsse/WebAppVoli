@@ -197,33 +197,49 @@ input[type="button"]:hover {
 
 
 
-/* Responsive per smartphone */
-@media(max-width:800px){
+/* RESPONSIVE */
 
+@media screen and (max-width: 800px) {
 
     .layout {
-
-        grid-template-columns:1fr;
-
-        width:90%;
-
+        grid-template-columns: 1fr;
+        width: 90%;
+        gap: 1.5rem;
+        margin: 2rem auto;
     }
 
 
     #d1 {
-
-        grid-column:auto;
-
-        padding:1rem;
-
+        grid-column: auto;
+        padding: 1rem;
     }
 
 
     #d2,
     #d3 {
+        width: 100%;
+        padding: 1.2rem;
+    }
 
-        margin:0;
 
+    form {
+        width: 100%;
+    }
+
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+
+    p {
+        font-size: 1rem;
+        line-height: 1.6rem;
+    }
+
+
+    input[type="button"] {
+        width: 80%;
     }
 
 }
