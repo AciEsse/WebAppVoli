@@ -1,20 +1,15 @@
-/*header{
-    background-color: #ffffff;
-    background-size: 100%;
-    height: 20rem;
-    border-bottom: 0.5% solid #ffffff;
-
-    
-}*/
 
 body {
     background-color: #faf7f5;
 }
 
+
+/*Admin*/
 .contenitore{
   width: 100%;
   height: 20rem;
 }
+/*Admin*/
 .sfondo{
     background-image: url(../immagini/head.jpg);
     background-size: cover;
@@ -24,12 +19,12 @@ body {
     
 }
 
-
 .logIconaUser {
 margin-left: 85%; 
 margin-top: -6rem;
 }
 
+/*Admin*/
 .logIcona {
 margin-left: 85%; 
 margin-top: -4rem;
@@ -122,10 +117,10 @@ nav{
     margin-top: 3rem;
 }
 
-#filtroUser{
+/*#filtroUser{
 
   margin-left: 10rem;
-}
+}*/
 
 
 #menu {
@@ -162,7 +157,7 @@ nav{
 
 
 li a{
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   text-decoration:none;
   color: black;
@@ -222,6 +217,7 @@ li{
     font-size: 1.5rem;
     color: #85290a;
     margin-left: 15rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
 }
 
 #legend{
@@ -238,11 +234,13 @@ li{
 
 
 .form{
-    padding-left: 15%; 
+    padding-left: 30%; 
     padding-right: 30%;      
-    align-items: center;     
-    max-width: 50%;        
+    align-items: center; 
+    width: 100%;    
+    max-width: 100%;        
     margin: 2% auto;
+    align-items: center;
 }
 
 .form label {
@@ -255,6 +253,9 @@ li{
     color:#555;
 
     margin-bottom:0.3rem;
+    width: 50%;
+    max-width: 50%;
+    display: inline-block;
     
 }
 
@@ -497,6 +498,11 @@ body {
 
 @media screen and (max-width: 900px) {
 
+    .logIconaUser {
+margin-left: 85%; 
+margin-top: -10rem;
+}
+
 
     /* HEADER */
     .contenitore {
@@ -513,7 +519,7 @@ body {
     .logIcona,
     .logIconaUser {
         margin-left: 0;
-        margin-top: 1rem;
+        margin-top: -4rem;
         text-align: right;
         padding-right: 2rem;
     }
@@ -521,61 +527,103 @@ body {
 
     /* MENU */
     .bi-list {
-        margin-left: 1rem;
+        margin-left: 1.5rem;
         margin-right: 1rem;
     }
 
 
     .bi-funnel {
-        margin-left: 1rem;
+        margin-left: 3rem;
     }
 
 
-    #menu,
+    #menu{
+        min-width: 10rem;
+        height: 5rem;
+        max-width: 10rem;
+        left: 0;
+
+    }
+    #formFiltro{
+        min-width: 40vw;
+        max-width: 45vw;
+
+    }
     #filtro {
         min-width: 80vw;
         max-width: 90vw;
         left: 0;
     }
 
+    li a{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  text-decoration:none;
+  color: black;
+  margin-left: 1rem;
+
+}
+
+li{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  text-decoration:none;
+  color: black;
+  height: 1rem;
+
+}
+
+.listafiltro{
+  padding-left: 1rem;
+}
+
 
 
     /* FIELDSET */
     .fieldset {
-        width: 90%;
-        margin: 2rem auto;
+        width: 70%;
+        margin: -2rem auto;
+        height: 10rem;
     }
 
 
     .legend {
         margin-left: 0;
         text-align:center;
-        font-size:1.2rem;
+        font-size:1rem;
+        margin-bottom: 1rem;
     }
 
 
     .form {
-        padding-left:5%;
+        padding-left:20%;
         padding-right:5%;
         max-width:100%;
         width:100%;
+        height: 10rem;
+        margin-top: 1rem;
     }
 
 
     .form label,
     #form label {
-        width:100%;
-        max-width:100%;
+        width:80%;
+        max-width:80%;
+        margin-top: 0.5rem;
     }
 
 
     #form input,
     .form input {
-        width:100%;
-        max-width:100%;
+        width:90%;
+        max-width:90%;
+        padding: -1rem;
+        
     }
 
-
+    #container{
+        height: 20rem;
+    }
 
     /* TABELLA */
     #contenutoTabella {
@@ -583,13 +631,23 @@ body {
     }
 
 
-    .table,
-    #table {
-        width:95%;
+    .table{
+        width:85%;
+        margin-top:29rem;
         font-size:0.8rem;
         display:block;
         overflow-x:auto;
         white-space:nowrap;
+        margin-bottom: 1rem;
+
+    }
+    #table {
+        width:85%;
+        font-size:0.8rem;
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+        margin-bottom: 1rem;
     }
 
 
@@ -614,12 +672,13 @@ body {
     /* CONTENUTO */
     #contenuto {
         position:relative;
-        top:0;
+        top:-30rem !important;
         left:0;
         transform:none;
         width:90%;
         max-width:90%;
         margin:2rem auto;
+        height: 27rem;
     }
 
 
@@ -640,9 +699,9 @@ body {
 
 @media screen and (max-width:480px) {
 
-       #contenuto{
-        top: -55rem !important;
-    }
+    
+
+   
 
 
 
@@ -652,10 +711,11 @@ body {
     }
 
 
-    #menu,
-    #filtro {
-        min-width:90vw;
-    }
+    
+    
+
+
+
 
 
     .table {
