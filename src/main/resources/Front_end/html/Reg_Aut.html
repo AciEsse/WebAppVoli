@@ -101,12 +101,26 @@ function login() {
                     "role": "USER"
                 })
             })
-            .then(res=>res.json()) 
-            .then(utente=>{
-                console.log(utente);
-                alert("Registrazione Effettuata!")
+            .then(res => {
+
+                if (!res.ok) {
+                    return res.text().then(messaggio => {
+                        throw new Error(messaggio);
+                    });
+                }
+
+                return res.json();
             })
-            .catch(error=>console.error("Errore nella creazione: ", error));
+
+            .then(utente => {
+                console.log(utente);
+                alert("Registrazione effettuata!");
+            })
+
+            .catch(error => {
+                console.error(error);
+                alert("Username non valido");
+            });
     }
 
     </script>

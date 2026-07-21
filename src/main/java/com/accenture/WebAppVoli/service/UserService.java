@@ -11,6 +11,7 @@ import com.accenture.WebAppVoli.enumeration.Role;
 import com.accenture.WebAppVoli.model.User;
 import com.accenture.WebAppVoli.repository.UserRepository;
 
+
 @Service
 public class UserService {
 
@@ -21,6 +22,9 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User saveUser(UserDto userDto){
+        if(userRepository.findByUsername(userDto.getUsername()).isPresent()){
+            throw new com.accenture.WebAppVoli.exception.BadRequestException("Username già presente");
+        }
         User user = new User();
         user.setNome(userDto.getNome());
         user.setCognome(userDto.getCognome());
